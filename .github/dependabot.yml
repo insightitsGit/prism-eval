@@ -1,22 +1,15 @@
 version: 2
 updates:
+  # Security/pip bumps only — GitHub Actions Dependabot DISABLED on purpose
+  # (Actions bots were opening CI PRs; main + workflows stay human-controlled)
   - package-ecosystem: pip
     directory: "/"
     schedule:
       interval: weekly
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 3
     labels:
       - dependencies
       - security
     commit-message:
       prefix: "deps"
-  - package-ecosystem: github-actions
-    directory: "/"
-    schedule:
-      interval: weekly
-    open-pull-requests-limit: 5
-    labels:
-      - dependencies
-      - github-actions
-    commit-message:
-      prefix: "ci"
+    # Do not auto-merge; human review required via branch protection
