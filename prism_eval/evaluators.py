@@ -6,13 +6,13 @@ from typing import Any, Dict, List, Mapping, Optional, Sequence
 
 from pydantic import BaseModel, Field
 
-from prismmanifest.prism_eval.canonicalize import (
+from prism_eval.canonicalize import (
     digits_only,
     is_digit_truncation,
     values_equivalent,
 )
-from prismmanifest.bench.g4_suite.behaviors import ExpectedBehavior
-from prismmanifest.spans.resolver import BoundingBoxSpanResolver
+from prism_eval.bench.g4_suite.behaviors import ExpectedBehavior
+from prism_eval.spans.resolver import BoundingBoxSpanResolver
 
 
 class SecurityEvalResult(BaseModel):

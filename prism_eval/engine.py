@@ -7,21 +7,21 @@ import time
 from collections import defaultdict
 from typing import Any, Dict
 
-import prismmanifest.bench.g4_suite as g4
-from prismmanifest.prism_eval.adapters import (
+import prism_eval.bench.g4_suite as g4
+from prism_eval.adapters import (
     AgentFn,
     ensure_async_agent,
     identity_agent,
     load_agent_callable,
 )
-from prismmanifest.prism_eval.evaluators import DeterminismEvaluator, SecurityEvaluator
-from prismmanifest.bench.g4_suite.behaviors import ExpectedBehavior, Severity
-from prismmanifest.prism_eval.models import (
+from prism_eval.evaluators import DeterminismEvaluator, SecurityEvaluator
+from prism_eval.bench.g4_suite.behaviors import ExpectedBehavior, Severity
+from prism_eval.models import (
     AttackBreakdown,
     CaseResult,
     SuiteReport,
 )
-from prismmanifest.schema import schema_contract_hash, verify_schema_contract
+from prism_eval.schema import schema_contract_hash, verify_schema_contract
 
 __all__ = [
     "PrismEvalEngine",

@@ -8,23 +8,23 @@ from typing import Any, Dict
 
 import pytest
 
-from prismmanifest.bench.g4_suite import load_adversarial_suite
-from prismmanifest.prism_eval.canonicalize import (
+from prism_eval.bench.g4_suite import load_adversarial_suite
+from prism_eval.canonicalize import (
     digits_only,
     is_digit_truncation,
     values_equivalent,
 )
-from prismmanifest.prism_eval.engine import PrismEvalEngine, ensure_async_agent
-from prismmanifest.prism_eval.evaluators import DeterminismEvaluator, SecurityEvaluator
-from prismmanifest.prism_eval.exporters import write_junit, write_sarif
-from prismmanifest.prism_eval.models import SuiteReport
-from prismmanifest.schema import (
+from prism_eval.engine import PrismEvalEngine, ensure_async_agent
+from prism_eval.evaluators import DeterminismEvaluator, SecurityEvaluator
+from prism_eval.exporters import write_junit, write_sarif
+from prism_eval.models import SuiteReport
+from prism_eval.schema import (
     schema_contract_hash,
     schema_hash_lock,
     verify_schema_contract,
     verify_schema_hash,
 )
-from prismmanifest.spans.resolver import BoundingBoxSpanResolver, SpanResolveError
+from prism_eval.spans.resolver import BoundingBoxSpanResolver, SpanResolveError
 
 
 @pytest.fixture
@@ -304,7 +304,7 @@ def test_expect_refuse_behavior() -> None:
 
 @pytest.mark.asyncio
 async def test_http_agent_adapter(monkeypatch: pytest.MonkeyPatch) -> None:
-    from prismmanifest.prism_eval.adapters import make_http_agent
+    from prism_eval.adapters import make_http_agent
 
     class _Resp:
         def __enter__(self):
@@ -366,7 +366,7 @@ def test_exporters(tmp_path: Path, corpus_dir: Path) -> None:
 
 
 def test_cli_main_exits_nonzero_on_failure(corpus_dir: Path, tmp_path: Path) -> None:
-    from prismmanifest.prism_eval import cli
+    from prism_eval import cli
 
     junit = tmp_path / "j.xml"
     sarif = tmp_path / "s.sarif"
@@ -390,6 +390,47 @@ def test_cli_main_exits_nonzero_on_failure(corpus_dir: Path, tmp_path: Path) -> 
     assert code == 1
     assert junit.exists()
     assert sarif.exists()
+
+
+def test_cli_default_exit_tracks_suite_passed_builtin() -> None:
+    """Empty/identity agent on builtin → suite_passed False and exit ≠ 0."""
+    from prism_eval import cli
+
+    code = cli.main(
+        [
+            "--policy-id",
+            "exit-align",
+            "--corpus",
+            "builtin",
+            "--no-upsell",
+        ]
+    )
+    assert code == 1
+
+
+def test_cli_exit_wideners_may_diverge_from_suite_passed() -> None:
+    """Explicit --no-fail-* wideners can exit 0 while suite_passed is False."""
+    from prism_eval.cli import _exit_code
+    from prism_eval.models import SuiteReport
+
+    report = SuiteReport(
+        policy_id="x",
+        total_cases=2,
+        passed_cases=0,
+        failed_cases=1,
+        error_cases=1,
+        overall_score=0.0,
+        min_pass_rate=0.0,
+        critical_failures=2,
+        critical_false_accept_count=1,
+        false_accept_count=1,
+        suite_passed=False,
+        g4_invariant_held=False,
+    )
+    assert _exit_code(report, fail_on_critical=True, fail_on_false_accept=True) == 1
+    assert (
+        _exit_code(report, fail_on_critical=False, fail_on_false_accept=False) == 0
+    )
 
 
 def test_ensure_async_agent_wraps_sync() -> None:
@@ -447,10 +488,14 @@ def test_audit_receipt_seal_and_verify(tmp_path: Path) -> None:
 def test_financepack_adapter_graceful() -> None:
     from prism_eval import financepack_g4_available, load_financepack_g4_cases
 
-    # In this package build_g4_cases is not present → False / ImportError
-    assert financepack_g4_available() is False
-    with pytest.raises(ImportError):
-        load_financepack_g4_cases()
+    if financepack_g4_available():
+        cases = load_financepack_g4_cases()
+        assert isinstance(cases, list)
+        assert len(cases) >= 1
+        assert cases[0].id
+    else:
+        with pytest.raises(ImportError):
+            load_financepack_g4_cases()
 
 
 def test_negative_money_canonicalize() -> None:

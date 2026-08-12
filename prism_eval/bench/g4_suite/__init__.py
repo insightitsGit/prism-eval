@@ -7,12 +7,12 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Iterable
 
-from prismmanifest.bench.ugly_corpus import build_ugly_packs, pack_to_case_dict
-from prismmanifest.bench.g4_suite.behaviors import (
+from prism_eval.bench.ugly_corpus import build_ugly_packs, pack_to_case_dict
+from prism_eval.bench.g4_suite.behaviors import (
     default_expected_behavior,
     default_severity,
 )
-from prismmanifest.schema import schema_contract_hash
+from prism_eval.schema import schema_contract_hash
 
 
 @dataclass(slots=True)

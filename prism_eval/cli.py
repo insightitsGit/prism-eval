@@ -7,11 +7,11 @@ import asyncio
 import json
 import sys
 
-from prismmanifest.prism_eval.engine import PrismEvalEngine, load_agent_callable
-from prismmanifest.prism_eval.exporters import write_junit, write_sarif
-from prismmanifest.prism_eval.audit import write_audit_receipt
-from prismmanifest.prism_eval.models import SuiteReport
-from prismmanifest.prism_eval import __version__ as TOOL_VERSION
+from prism_eval.engine import PrismEvalEngine, load_agent_callable
+from prism_eval.exporters import write_junit, write_sarif
+from prism_eval.audit import write_audit_receipt
+from prism_eval.models import SuiteReport
+from prism_eval import __version__ as TOOL_VERSION
 
 
 BANNER = "======================= PRISM-EVAL SUITE EXECUTION ======================="
@@ -103,6 +103,17 @@ def _exit_code(
     fail_on_critical: bool,
     fail_on_false_accept: bool,
 ) -> int:
+    """
+    Process exit status.
+
+    Default (both fail-on flags true): exit tracks ``report.suite_passed`` exactly.
+    ``--no-fail-on-critical`` / ``--no-fail-on-false-accept`` are explicit wideners
+    that may exit ``0`` even when the printed Result is FAIL / G4 invariant BROKEN.
+    """
+    if fail_on_critical and fail_on_false_accept:
+        return 0 if report.suite_passed else 1
+
+    # Widened exit policy (intentionally may diverge from suite_passed).
     if report.overall_score < report.min_pass_rate:
         return 1
     if fail_on_critical and report.critical_failures > 0:
@@ -169,7 +180,10 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--no-fail-on-critical",
         action="store_true",
-        help="Do not fail the process solely due to critical case failures",
+        help=(
+            "WIDENER: ignore critical case failures for process exit. "
+            "May exit 0 while Result shows FAIL (suite_passed remains False)."
+        ),
     )
     parser.add_argument(
         "--fail-on-false-accept",
@@ -180,7 +194,10 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--no-fail-on-false-accept",
         action="store_true",
-        help="Do not fail solely due to critical false-accepts",
+        help=(
+            "WIDENER: ignore critical false-accepts for process exit. "
+            "May exit 0 while G4 invariant is BROKEN (suite_passed remains False)."
+        ),
     )
     parser.add_argument(
         "--no-upsell",

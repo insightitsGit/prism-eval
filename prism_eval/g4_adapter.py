@@ -10,7 +10,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from prismmanifest.bench.g4_suite import AdversarialCase, case_from_mapping
+from prism_eval.bench.g4_suite import AdversarialCase, case_from_mapping
 
 
 def financepack_g4_available() -> bool:

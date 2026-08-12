@@ -4,17 +4,18 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "prism-eval"
-version = "0.2.2"
+version = "0.3.0"
 description = "Open-source unit testing and red-teaming for AI agents — catch digit drops, prompt injections, and OCR drift before production."
 readme = "README.md"
 requires-python = ">=3.10"
 license = "Apache-2.0"
 license-files = ["LICENSE"]
 authors = [
-  { name = "Prism-Eval contributors", email = "enterprise@insightits.com" },
+  { name = "Amin Parva", email = "insightits.info@gmail.com" },
 ]
 maintainers = [
-  { name = "InsightITS", email = "enterprise@insightits.com" },
+  { name = "Amin Parva", email = "insightits.info@gmail.com" },
+  { name = "InsightITS", email = "insightits.info@gmail.com" },
 ]
 keywords = [
   "ai-agents",
@@ -71,14 +72,14 @@ Security = "https://github.com/insightitsGit/prism-eval/security/policy"
 Company = "https://www.insightits.com"
 
 [project.scripts]
-prism-eval = "prismmanifest.prism_eval.cli:main"
+prism-eval = "prism_eval.cli:main"
 
 [tool.setuptools]
 include-package-data = true
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["prismmanifest*", "prism_eval*"]
+include = ["prism_eval*"]
 exclude = ["tests*", "demo*", "docs*", "scripts*"]
 
 [tool.pytest.ini_options]

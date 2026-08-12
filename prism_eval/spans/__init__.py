@@ -1,6 +1,6 @@
 """Span utilities for PrismManifest evidence binding."""
 
-from prismmanifest.spans.resolver import (
+from prism_eval.spans.resolver import (
     BoundingBox,
     BoundingBoxSpanResolver,
     ResolvedSpan,

@@ -6,7 +6,7 @@ from typing import Any, Dict, List, Optional
 
 from pydantic import BaseModel, Field
 
-from prismmanifest.bench.g4_suite.behaviors import (
+from prism_eval.bench.g4_suite.behaviors import (
     NEVER_FALSE_ACCEPT_ATTACKS,
     ExpectedBehavior,
     Severity,

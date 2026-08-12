@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] — 2026-08-12
+
+### Breaking
+- Stop shipping a top-level `prismmanifest` package from this repo. All internals live under `prism_eval.*` so `pip install prism-eval` coexists with the gate package `prismmanifest` / Prism-Shield.
+- CLI entry point is now `prism_eval.cli:main` (was `prismmanifest.prism_eval.cli:main`).
+- Remove support for `from prismmanifest.prism_eval import …` — use `from prism_eval import …`.
+
+### Fixed
+- Default CLI exit code tracks `SuiteReport.suite_passed` (BUG-002). `--no-fail-on-critical` / `--no-fail-on-false-accept` remain documented wideners.
+- CI coexistence job installs `prismmanifest` beside `prism-eval` and asserts import + fail-closed CLI.
+
+### Added
+- Optional FinancePack adapter still probes **external** `prismmanifest.bench.g4_suite.cases.build_g4_cases` when present.
+
 ## [0.2.2] — 2026-08-12
 
 ### Added
@@ -49,7 +63,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initial Prism-Eval engine, evaluators, CLI, builtin/ugly corpora
 
-[Unreleased]: https://github.com/insightitsGit/prism-eval/compare/v0.2.2...HEAD
+[Unreleased]: https://github.com/insightitsGit/prism-eval/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/insightitsGit/prism-eval/releases/tag/v0.3.0
 [0.2.2]: https://github.com/insightitsGit/prism-eval/releases/tag/v0.2.2
 [0.2.1]: https://github.com/insightitsGit/prism-eval/releases/tag/v0.2.1
 [0.2.0]: https://github.com/insightitsGit/prism-eval/releases/tag/v0.2.0

@@ -1,6 +1,5 @@
 include LICENSE README.md CHANGELOG.md SECURITY.md SUPPORT.md pyproject.toml
 recursive-include prism_eval *.py
-recursive-include prismmanifest *.py
 recursive-include tests *.py
 recursive-include testdata *
 recursive-include docs *.md *.html

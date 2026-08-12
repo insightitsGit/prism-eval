@@ -12,7 +12,7 @@ from typing import Any, Dict, Mapping, Optional, Union
 
 from pydantic import BaseModel, Field
 
-from prismmanifest.prism_eval.models import SuiteReport
+from prism_eval.models import SuiteReport
 
 
 def _canonical_bytes(payload: Mapping[str, Any]) -> bytes:

@@ -5,8 +5,8 @@
 [![PyPI version](https://img.shields.io/pypi/v/prism-eval.svg)](https://pypi.org/project/prism-eval/)
 [![Python](https://img.shields.io/pypi/pyversions/prism-eval.svg)](https://pypi.org/project/prism-eval/)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
-[![CI](https://img.shields.io/badge/CI-pytest-passing-brightgreen.svg)](https://github.com/prismmanifest/prism-eval/actions)
-[![GitHub stars](https://img.shields.io/github/stars/prismmanifest/prism-eval?style=social)](https://github.com/prismmanifest/prism-eval)
+[![CI](https://img.shields.io/badge/CI-pytest-passing-brightgreen.svg)](https://github.com/insightitsGit/prism-eval/actions)
+[![GitHub stars](https://img.shields.io/github/stars/insightitsGit/prism-eval?style=social)](https://github.com/insightitsGit/prism-eval)
 
 **Keywords:** AI agent testing, LLM red teaming, prompt injection tests, digit drop detection, OCR extraction eval, LangGraph pytest, CI/CD for AI agents, adversarial corpus, zero-trust AI gateway
 
@@ -17,11 +17,12 @@
 | **Browser (GitHub Pages)** | [Live interactive demo](https://insightitsgit.github.io/prism-eval/) — toggle vulnerable vs hardened agent, run G4 in-browser |
 | **Streamlit (real engine)** | `pip install "prism-eval[demo]" && streamlit run demo/app.py` |
 
-### Enterprise readiness (v0.2.1+)
+### Enterprise readiness (v0.3.0+)
 
 | Capability | Status |
 |------------|--------|
-| G4 false-accept invariant + CI exit codes | Yes |
+| Coexists with gate `prismmanifest` / Prism-Shield | Yes (no namespace collision) |
+| G4 false-accept invariant + CI exit ≡ `suite_passed` | Yes |
 | Immutable audit receipts (`--audit-receipt`) | Yes |
 | SECURITY / threat model / SemVer policy | Yes |
 | Expanded builtin + digit-fuzz corpus | Yes |
@@ -61,14 +62,11 @@ Prism-Eval turns **G4 adversarial corpora** (digit drops, line-item shifts, prom
 pip install prism-eval
 ```
 
-Until the PyPI listing propagates, any of these also work:
+Works alongside the gate package:
 
 ```bash
-# GitHub release wheel (v0.2.2+)
-pip install https://github.com/insightitsGit/prism-eval/releases/download/v0.2.2/prism_eval-0.2.2-py3-none-any.whl
-
-# Direct from Git
-pip install "git+https://github.com/insightitsGit/prism-eval.git@v0.2.2"
+pip install prism-eval prismmanifest
+python -c "from prism_eval import PrismEvalEngine; import prismmanifest"
 ```
 
 Dev extras (pytest + asyncio):
@@ -381,14 +379,15 @@ Apache License 2.0. See [`LICENSE`](LICENSE) if present in this repository.
 
 ## Links
 
+- Author: **Amin Parva** ([insightits.info@gmail.com](mailto:insightits.info@gmail.com))
 - Company: [https://www.insightits.com](https://www.insightits.com)
 - Public repo policy: [docs/PUBLIC_REPO.md](docs/PUBLIC_REPO.md)
+- GitHub: https://github.com/insightitsGit/prism-eval
 - PyPI: [https://pypi.org/project/prism-eval/](https://pypi.org/project/prism-eval/)
 - Publish runbook: [docs/PYPI_PUBLISHING.md](docs/PYPI_PUBLISHING.md)
 - Prism-Shield (runtime gateway): [https://pypi.org/project/prism-shield/](https://pypi.org/project/prism-shield/)
 - Security: [SECURITY.md](SECURITY.md)
 - Contributing: [CONTRIBUTING.md](CONTRIBUTING.md)
-- Issues / stars: https://github.com/insightitsGit/prism-eval
 
 ```bash
 pip install prism-eval

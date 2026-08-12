@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Union
 from xml.dom import minidom
 
-from prismmanifest.prism_eval.models import SuiteReport
+from prism_eval.models import SuiteReport
 
 
 def write_junit(report: SuiteReport, path: Union[str, Path]) -> None:

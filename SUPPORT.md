@@ -22,7 +22,7 @@ For **SLA-backed** support, signed corpus packs, or runtime enforcement integrat
 
 - Pair with **Prism-Shield** for production interception  
 - Company: [https://www.insightits.com](https://www.insightits.com)  
-- Contact: **enterprise@insightits.com**
+- Contact: **insightits.info@gmail.com**
 
 ## Compatibility
 

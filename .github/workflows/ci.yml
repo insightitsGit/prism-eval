@@ -42,3 +42,52 @@ jobs:
           python -c "from prism_eval import load_audit_receipt; r=load_audit_receipt('audit.json'); assert r.verify()"
       - name: SBOM script smoke
         run: python scripts/generate_sbom.py /tmp/sbom.cdx.json && test -s /tmp/sbom.cdx.json
+
+  coexistence:
+    name: coexist with prismmanifest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install prism-eval then gate prismmanifest
+        run: |
+          python -m pip install --upgrade pip
+          pip install .
+          pip install "prismmanifest>=0.3.4"
+      - name: Assert gate package owns prismmanifest
+        run: |
+          python - <<'PY'
+          import importlib.metadata as md
+          import prismmanifest
+          from pathlib import Path
+          ver = md.version("prismmanifest")
+          path = Path(prismmanifest.__file__).resolve()
+          print("prismmanifest version:", ver)
+          print("prismmanifest file:", path)
+          assert "site-packages" in path.as_posix()
+          PY
+      - name: Import PrismEvalEngine beside gate package
+        run: |
+          python -c "from prism_eval import PrismEvalEngine; print(PrismEvalEngine)"
+      - name: Empty-agent CLI fail-closed (exit 1)
+        run: |
+          set +e
+          prism-eval --policy-id ci --corpus builtin --no-upsell
+          code=$?
+          set -e
+          test "$code" -eq 1
+      - name: Wheel must not ship prismmanifest
+        run: |
+          pip install build
+          python -m build --wheel -o /tmp/pe-dist
+          python - <<'PY'
+          import zipfile
+          from pathlib import Path
+          whl = next(Path("/tmp/pe-dist").glob("*.whl"))
+          names = zipfile.ZipFile(whl).namelist()
+          bad = [n for n in names if n.startswith("prismmanifest/")]
+          assert not bad, f"wheel still contains prismmanifest: {bad[:5]}"
+          print("wheel OK:", whl.name)
+          PY
