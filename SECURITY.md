@@ -13,7 +13,10 @@ Prism-Eval is an **open-source pre-deploy evaluation tool**. It is not a runtime
 
 Please **do not** open a public GitHub issue for security vulnerabilities.
 
-Email: **security@insightits.com** (or open a private GitHub Security Advisory on this repository).
+Preferred (private):
+
+1. [GitHub Security Advisory (private vulnerability reporting)](https://github.com/insightitsGit/prism-eval/security/advisories/new)  
+2. Email: **security@insightits.com**
 
 Include:
 
@@ -23,6 +26,18 @@ Include:
 4. Any suggested fix  
 
 We aim to acknowledge within **3 business days** and provide a remediation plan within **14 days** for confirmed critical issues.
+
+## Public repository protections
+
+This repo enables:
+
+- Secret scanning + push protection  
+- Dependabot alerts and security updates  
+- Private vulnerability reporting  
+- Branch protection on `main` (no force-push / no branch deletion; CI required for PRs)  
+- Issue templates that route security away from public issues  
+
+Do not commit tokens, `.env` files, or PyPI / cloud credentials. Use GitHub Actions secrets only.
 
 ## Scope
 

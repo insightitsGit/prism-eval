@@ -17,13 +17,19 @@ pytest tests/test_prism_eval_engine.py -v
 ## Pull requests
 
 1. Open an issue first for larger design changes  
-2. Keep PRs focused; include tests for oracle / corpus / CLI behavior  
-3. Do **not** weaken G4 false-accept criteria to make tests pass  
-4. Update `CHANGELOG.md` under `[Unreleased]`  
+2. Fork the repo and open a PR against `main` (direct pushes to `main` are restricted)  
+3. Keep PRs focused; include tests for oracle / corpus / CLI behavior  
+4. Do **not** weaken G4 false-accept criteria to make tests pass  
+5. Update `CHANGELOG.md` under `[Unreleased]`  
+6. Never commit secrets, API tokens, or credentials  
+
+## Asking questions
+
+Use the **Question** issue template. For enterprise / SLA topics see [SUPPORT.md](SUPPORT.md) or [InsightITS](https://www.insightits.com).
 
 ## Security
 
-Report vulnerabilities privately — see [SECURITY.md](SECURITY.md).
+Report vulnerabilities privately — see [SECURITY.md](SECURITY.md). Do not file public issues for security reports.
 
 ## Code style
 

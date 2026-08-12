@@ -1,0 +1,40 @@
+name: Feature request
+description: Propose an enhancement to Prism-Eval
+title: "[feat]: "
+labels: ["enhancement", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Describe the problem first, then the proposed change.
+        Maintainers prioritize oracle integrity and CI-gate usefulness over feature volume.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What is hard or missing today?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Optional
+  - type: dropdown
+    id: impact
+    attributes:
+      label: Primary impact
+      options:
+        - Security / false-accept detection
+        - CI / DX
+        - Corpus coverage
+        - Performance
+        - Docs / packaging
+    validations:
+      required: true

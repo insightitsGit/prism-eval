@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/insightitsGit/prism-eval/security/advisories/new
+    about: Report security issues privately (do not file a public issue).
+  - name: InsightITS (company)
+    url: https://www.insightits.com
+    about: Product / enterprise questions about Prism-Eval and Prism-Shield.
+  - name: Support policy
+    url: https://github.com/insightitsGit/prism-eval/blob/main/SUPPORT.md
+    about: Response targets and how to get help.

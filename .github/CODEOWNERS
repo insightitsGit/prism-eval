@@ -1,0 +1,7 @@
+# Default owners for public contributions and review routing.
+*       @insightitsGit
+
+/.github/                 @insightitsGit
+/pyproject.toml           @insightitsGit
+/SECURITY.md              @insightitsGit
+/docs/THREAT_MODEL.md     @insightitsGit

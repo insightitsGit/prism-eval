@@ -1,0 +1,64 @@
+name: Bug report
+description: Something broken in Prism-Eval (oracle, CLI, corpus, adapters, exporters)
+title: "[bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping keep Prism-Eval reliable.
+        **Do not report security vulnerabilities here** — use [private advisories](https://github.com/insightitsGit/prism-eval/security/advisories/new) or email security@insightits.com.
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: PyPI / git tag / commit SHA
+      placeholder: "0.2.2"
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Engine / scoring
+        - Security oracle / G4 invariant
+        - CLI
+        - Corpus / cases
+        - Adapters (HTTP / sync / async)
+        - Exporters (JUnit / SARIF / audit)
+        - Docs / packaging
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: Minimal command or code snippet
+      placeholder: |
+        prism-eval --policy-id demo --corpus builtin --min-pass-rate 0.95 --no-upsell
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: Paste error text / report summary (redact secrets)
+    validations:
+      required: true
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I searched existing issues first
+          required: true
+        - label: This is not a security vulnerability report
+          required: true
