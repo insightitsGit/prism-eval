@@ -17,10 +17,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Immutable `AuditReceipt` with blake2b seal + CLI `--audit-receipt`
 - Expanded builtin corpus (HTML injection, currency distractor, format, negative AGI, 32 digit-fuzz cases)
 - Optional FinancePackBench-G4 adapter (`load_financepack_g4_cases`)
-- Release workflow with wheel/sdist, CycloneDX SBOM, PyPI trusted publishing hook
+- Release workflow with wheel/sdist, CycloneDX SBOM, provenance attestations, PyPI publish
+- Dependabot, CONTRIBUTING, Code of Conduct, PyPI publishing runbook
 
 ### Security
 - Documented coordinated disclosure and G4 fail-closed defaults
+- CI asserts empty-agent fail-closed + audit receipt verify
 
 ## [0.2.0] — 2026-08-12
 
@@ -41,6 +43,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initial Prism-Eval engine, evaluators, CLI, builtin/ugly corpora
 
-[Unreleased]: https://github.com/insightitsGit/prism-eval/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/insightitsGit/prism-eval/compare/v0.2.1...HEAD
+[0.2.1]: https://github.com/insightitsGit/prism-eval/releases/tag/v0.2.1
 [0.2.0]: https://github.com/insightitsGit/prism-eval/releases/tag/v0.2.0
 [0.1.0]: https://github.com/insightitsGit/prism-eval/releases/tag/v0.1.0

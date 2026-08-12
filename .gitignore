@@ -31,6 +31,8 @@ Thumbs.db
 report.json
 prism-eval.junit.xml
 prism-eval.sarif
+sbom.cdx.json
+audit.json
 
 # Cursor
 .cursor/
