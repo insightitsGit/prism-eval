@@ -53,4 +53,4 @@ __all__ = [
     "write_sarif",
 ]
 
-__version__ = "0.2.1"
+__version__ = "0.2.2"

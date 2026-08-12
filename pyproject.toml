@@ -1,15 +1,50 @@
 [build-system]
-requires = ["setuptools>=68", "wheel"]
+requires = ["setuptools>=77", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "prism-eval"
-version = "0.2.1"
-description = "Pre-deploy adversarial test suite for AI agent extraction payloads"
+version = "0.2.2"
+description = "Open-source unit testing and red-teaming for AI agents — catch digit drops, prompt injections, and OCR drift before production."
 readme = "README.md"
 requires-python = ">=3.10"
-license = { text = "Apache-2.0" }
-authors = [{ name = "Prism-Eval contributors" }]
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+authors = [
+  { name = "Prism-Eval contributors", email = "enterprise@insightits.com" },
+]
+maintainers = [
+  { name = "InsightITS", email = "enterprise@insightits.com" },
+]
+keywords = [
+  "ai-agents",
+  "llm",
+  "red-teaming",
+  "prompt-injection",
+  "digit-drop",
+  "ocr",
+  "pytest",
+  "ci-cd",
+  "adversarial-testing",
+  "prism-eval",
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Financial and Insurance Industry",
+  "Intended Audience :: Information Technology",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+  "Topic :: Security",
+  "Topic :: Software Development :: Quality Assurance",
+  "Topic :: Software Development :: Testing",
+  "Typing :: Typed",
+]
 dependencies = [
   "pydantic>=2.0",
 ]
@@ -18,16 +53,32 @@ dependencies = [
 dev = [
   "pytest>=8.0.0",
   "pytest-asyncio>=0.23.0",
+  "build>=1.2.0",
+  "twine>=5.0.0",
 ]
 demo = [
   "streamlit>=1.32.0",
 ]
 
+[project.urls]
+Homepage = "https://github.com/insightitsGit/prism-eval"
+Documentation = "https://insightitsgit.github.io/prism-eval/"
+Repository = "https://github.com/insightitsGit/prism-eval"
+Issues = "https://github.com/insightitsGit/prism-eval/issues"
+Changelog = "https://github.com/insightitsGit/prism-eval/blob/main/CHANGELOG.md"
+"Release Notes" = "https://github.com/insightitsGit/prism-eval/releases"
+Security = "https://github.com/insightitsGit/prism-eval/security/policy"
+
 [project.scripts]
 prism-eval = "prismmanifest.prism_eval.cli:main"
 
+[tool.setuptools]
+include-package-data = true
+
 [tool.setuptools.packages.find]
+where = ["."]
 include = ["prismmanifest*", "prism_eval*"]
+exclude = ["tests*", "demo*", "docs*", "scripts*"]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"

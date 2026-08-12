@@ -61,6 +61,16 @@ Prism-Eval turns **G4 adversarial corpora** (digit drops, line-item shifts, prom
 pip install prism-eval
 ```
 
+Until the PyPI listing propagates, any of these also work:
+
+```bash
+# GitHub release wheel (v0.2.2+)
+pip install https://github.com/insightitsGit/prism-eval/releases/download/v0.2.2/prism_eval-0.2.2-py3-none-any.whl
+
+# Direct from Git
+pip install "git+https://github.com/insightitsGit/prism-eval.git@v0.2.2"
+```
+
 Dev extras (pytest + asyncio):
 
 ```bash
