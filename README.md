@@ -4,9 +4,8 @@
 
 [![PyPI version](https://img.shields.io/pypi/v/prism-eval.svg)](https://pypi.org/project/prism-eval/)
 [![Python](https://img.shields.io/pypi/pyversions/prism-eval.svg)](https://pypi.org/project/prism-eval/)
-[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
-[![CI](https://img.shields.io/badge/CI-pytest-passing-brightgreen.svg)](https://github.com/insightitsGit/prism-eval/actions)
-[![GitHub stars](https://img.shields.io/github/stars/insightitsGit/prism-eval?style=social)](https://github.com/insightitsGit/prism-eval)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![CI](https://github.com/insightitsGit/prism-eval/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/insightitsGit/prism-eval/actions/workflows/ci.yml)
 
 **Keywords:** AI agent testing, LLM red teaming, prompt injection tests, digit drop detection, OCR extraction eval, LangGraph pytest, CI/CD for AI agents, adversarial corpus, zero-trust AI gateway
 
