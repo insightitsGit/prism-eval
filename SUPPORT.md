@@ -21,6 +21,7 @@ Prism-Eval is Apache-2.0 and free to use in commercial products.
 For **SLA-backed** support, signed corpus packs, or runtime enforcement integrated with your DAG:
 
 - Pair with **Prism-Shield** for production interception  
+- Company: [https://www.insightits.com](https://www.insightits.com)  
 - Contact: **enterprise@insightits.com**
 
 ## Compatibility

@@ -381,6 +381,7 @@ Apache License 2.0. See [`LICENSE`](LICENSE) if present in this repository.
 
 ## Links
 
+- Company: [https://www.insightits.com](https://www.insightits.com)
 - PyPI: [https://pypi.org/project/prism-eval/](https://pypi.org/project/prism-eval/)
 - Publish runbook: [docs/PYPI_PUBLISHING.md](docs/PYPI_PUBLISHING.md)
 - Prism-Shield (runtime gateway): [https://pypi.org/project/prism-shield/](https://pypi.org/project/prism-shield/)
