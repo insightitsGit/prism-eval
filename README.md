@@ -17,6 +17,20 @@
 | **Browser (GitHub Pages)** | [Live interactive demo](https://insightitsgit.github.io/prism-eval/) — toggle vulnerable vs hardened agent, run G4 in-browser |
 | **Streamlit (real engine)** | `pip install "prism-eval[demo]" && streamlit run demo/app.py` |
 
+### Enterprise readiness (v0.2.1+)
+
+| Capability | Status |
+|------------|--------|
+| G4 false-accept invariant + CI exit codes | Yes |
+| Immutable audit receipts (`--audit-receipt`) | Yes |
+| SECURITY / threat model / SemVer policy | Yes |
+| Expanded builtin + digit-fuzz corpus | Yes |
+| JUnit / SARIF / SBOM release artifacts | Yes |
+| Optional FinancePackBench-G4 adapter | Yes (when full suite installed) |
+| Runtime enforcement | Use **Prism-Shield** (companion) |
+
+See [SECURITY.md](SECURITY.md), [docs/THREAT_MODEL.md](docs/THREAT_MODEL.md), [docs/API_STABILITY.md](docs/API_STABILITY.md).
+
 ---
 
 ## The Problem Statement (Why `pytest` isn't enough)
@@ -332,6 +346,7 @@ async def run() -> SuiteReport:
 | `--timeout` | Per-case agent timeout seconds |
 | `--concurrency` | Parallel agent calls |
 | `--junit` / `--sarif` / `--json-out` | CI artifacts |
+| `--audit-receipt` | Sealed immutable run receipt (blake2b) |
 | `--no-upsell` | Suppress Prism-Shield tip |
 | `--require-schema-hash` | Enforce schema contract hash lock |
 | `--no-fail-on-false-accept` | Soften G4 exit policy (not recommended) |

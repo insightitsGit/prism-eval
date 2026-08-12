@@ -9,7 +9,9 @@ import sys
 
 from prismmanifest.prism_eval.engine import PrismEvalEngine, load_agent_callable
 from prismmanifest.prism_eval.exporters import write_junit, write_sarif
+from prismmanifest.prism_eval.audit import write_audit_receipt
 from prismmanifest.prism_eval.models import SuiteReport
+from prismmanifest.prism_eval import __version__ as TOOL_VERSION
 
 
 BANNER = "======================= PRISM-EVAL SUITE EXECUTION ======================="
@@ -200,6 +202,11 @@ def main(argv: list[str] | None = None) -> int:
         default=None,
         help="Optional path to write SARIF 2.1.0",
     )
+    parser.add_argument(
+        "--audit-receipt",
+        default=None,
+        help="Optional path to write a sealed immutable audit receipt JSON",
+    )
     args = parser.parse_args(argv)
 
     if args.threshold is not None:
@@ -256,6 +263,14 @@ def main(argv: list[str] | None = None) -> int:
         write_junit(report, args.junit)
     if args.sarif:
         write_sarif(report, args.sarif)
+    if args.audit_receipt:
+        receipt = write_audit_receipt(
+            report,
+            args.audit_receipt,
+            corpus_path=args.corpus,
+            tool_version=TOOL_VERSION,
+        )
+        print(f"Audit receipt: {args.audit_receipt} (hash={receipt.receipt_hash[:16]}…)")
 
     return _exit_code(
         report,
