@@ -41,7 +41,18 @@ workflow_ref: .../release.yml@refs/tags/v0.2.1
 environment: pypi
 ```
 
-## API token fallback
+## API token (recommended for first upload)
+
+### Option A — local upload (fastest)
+
+```powershell
+cd c:\code\Prism_Eval
+$env:TWINE_USERNAME = "__token__"
+$env:TWINE_PASSWORD = "pypi-YOUR_TOKEN_HERE"   # paste full token including pypi- prefix
+python -m twine upload dist/*
+```
+
+### Option B — GitHub Actions secret
 
 ```text
 GitHub repo → Settings → Secrets and variables → Actions
@@ -49,13 +60,19 @@ Name:  PYPI_API_TOKEN
 Value: pypi-AgEIcHlwaS5vcmc...
 ```
 
-The release job passes `password: ${{ secrets.PYPI_API_TOKEN }}` into `pypa/gh-action-pypi-publish`.
+Then re-run the failed publish job:
+
+```powershell
+gh run rerun 31571821511 --failed
+```
+
+The release job passes `user: __token__` and `password: ${{ secrets.PYPI_API_TOKEN }}` into `pypa/gh-action-pypi-publish`.
 
 ## Verify
 
 ```bash
 pip index versions prism-eval
-pip install prism-eval==0.2.1
+pip install prism-eval==0.2.2
 python -c "import prism_eval; print(prism_eval.__version__)"
 ```
 

@@ -62,20 +62,31 @@ jobs:
         with:
           name: python-package-distributions
           path: .
+      - name: Publish to PyPI (API token)
+        id: publish_token
+        if: ${{ secrets.PYPI_API_TOKEN != '' }}
+        continue-on-error: true
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          skip-existing: true
+          user: __token__
+          password: ${{ secrets.PYPI_API_TOKEN }}
       - name: Publish to PyPI (OIDC Trusted Publishing)
-        id: publish
+        id: publish_oidc
+        if: ${{ secrets.PYPI_API_TOKEN == '' }}
         continue-on-error: true
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           skip-existing: true
       - name: Report PyPI publish status
         run: |
-          if [ "${{ steps.publish.outcome }}" = "success" ]; then
-            echo "Published to PyPI via Trusted Publishing."
+          token_ok="${{ steps.publish_token.outcome }}"
+          oidc_ok="${{ steps.publish_oidc.outcome }}"
+          if [ "$token_ok" = "success" ] || [ "$oidc_ok" = "success" ]; then
+            echo "Published to PyPI."
             exit 0
           fi
-          echo "::warning::PyPI publish pending. Register Pending Trusted Publisher on pypi.org — see docs/PYPI_PUBLISHING.md — then re-run this job."
-          echo "Owner=insightitsGit Repo=prism-eval Workflow=release.yml Environment=pypi"
+          echo "::warning::PyPI publish failed. Set repo secret PYPI_API_TOKEN (pypi-...) or register Trusted Publisher — see docs/PYPI_PUBLISHING.md"
           exit 0
 
   github-release:
