@@ -5,26 +5,40 @@ The Release workflow publishes on tag push (`v*`) using either:
 1. **Trusted Publishing (OIDC)** — preferred, no long-lived tokens  
 2. **API token** — set GitHub Actions secret `PYPI_API_TOKEN` to a PyPI token (`pypi-...`)
 
-## One-time Trusted Publisher setup (recommended)
+## One-time Trusted Publisher setup (required for first upload)
 
-1. Create / sign in at [https://pypi.org](https://pypi.org)  
-2. Open **Publishing → Pending Publisher** (new project) or project **Settings → Publishing**  
-3. Register:
+PyPI rejected the v0.2.1 OIDC exchange with `invalid-publisher` until this is registered.
+
+1. Sign in at [https://pypi.org](https://pypi.org)  
+2. Open **Your projects → Publishing → Pending publisher** (new project)  
+3. Enter exactly:
 
 | Field | Value |
 |-------|-------|
 | PyPI project name | `prism-eval` |
 | Owner | `insightitsGit` |
+| Owner id | `295265130` |
 | Repository | `prism-eval` |
 | Workflow name | `release.yml` |
 | Environment name | `pypi` |
 
-4. In GitHub → **Settings → Environments → pypi** (created automatically on first run, or create manually)  
-5. Push a version tag:
+4. Save the pending publisher  
+5. Re-run the failed `publish-pypi` job on the [v0.2.1 Release workflow](https://github.com/insightitsGit/prism-eval/actions/workflows/release.yml), **or**:
 
 ```bash
-git tag v0.2.1
-git push origin v0.2.1
+gh workflow run release.yml -f publish_pypi=true
+# or re-run job:
+gh run rerun <run-id> --failed
+```
+
+### Debugging claims from v0.2.1
+
+```
+repository: insightitsGit/prism-eval
+repository_owner: insightitsGit
+repository_owner_id: 295265130
+workflow_ref: .../release.yml@refs/tags/v0.2.1
+environment: pypi
 ```
 
 ## API token fallback

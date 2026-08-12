@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       publish_pypi:
-        description: "Publish to PyPI (requires Trusted Publisher or PYPI_API_TOKEN)"
+        description: "Attempt PyPI publish (Trusted Publisher)"
         type: boolean
         default: true
 
@@ -62,12 +62,21 @@ jobs:
         with:
           name: python-package-distributions
           path: .
-      - name: Publish to PyPI
+      - name: Publish to PyPI (OIDC Trusted Publishing)
+        id: publish
+        continue-on-error: true
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
-          # Prefer repo secret PYPI_API_TOKEN when present; otherwise OIDC trusted publishing.
-          password: ${{ secrets.PYPI_API_TOKEN }}
           skip-existing: true
+      - name: Report PyPI publish status
+        run: |
+          if [ "${{ steps.publish.outcome }}" = "success" ]; then
+            echo "Published to PyPI via Trusted Publishing."
+            exit 0
+          fi
+          echo "::warning::PyPI publish pending. Register Pending Trusted Publisher on pypi.org — see docs/PYPI_PUBLISHING.md — then re-run this job."
+          echo "Owner=insightitsGit Repo=prism-eval Workflow=release.yml Environment=pypi"
+          exit 0
 
   github-release:
     needs: build
@@ -95,7 +104,7 @@ jobs:
             - Wheels + sdist attached
             - CycloneDX SBOM attached (`sbom.cdx.json`)
             - Build provenance attested via GitHub Actions
-            - PyPI publish runs when Trusted Publishing or `PYPI_API_TOKEN` is configured
+            - PyPI: register Trusted Publishing (docs/PYPI_PUBLISHING.md) then re-run `publish-pypi`
 
             See CHANGELOG.md for details.
         env:
