@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.1] — 2026-08-12
+
+### Fixed
+- PyPI/README badges: drop broken stars badge; use working GitHub Actions CI SVG and absolute License link
+
 ## [0.3.0] — 2026-08-12
 
 ### Breaking
@@ -63,7 +68,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initial Prism-Eval engine, evaluators, CLI, builtin/ugly corpora
 
-[Unreleased]: https://github.com/insightitsGit/prism-eval/compare/v0.3.0...HEAD
+[Unreleased]: https://github.com/insightitsGit/prism-eval/compare/v0.3.1...HEAD
+[0.3.1]: https://github.com/insightitsGit/prism-eval/releases/tag/v0.3.1
 [0.3.0]: https://github.com/insightitsGit/prism-eval/releases/tag/v0.3.0
 [0.2.2]: https://github.com/insightitsGit/prism-eval/releases/tag/v0.2.2
 [0.2.1]: https://github.com/insightitsGit/prism-eval/releases/tag/v0.2.1

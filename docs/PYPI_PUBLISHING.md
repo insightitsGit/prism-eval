@@ -26,7 +26,7 @@ python -m twine upload dist/*
 
 ```bash
 pip index versions prism-eval
-pip install prism-eval==0.3.0
+pip install prism-eval==0.3.1
 python -c "import prism_eval; print(prism_eval.__version__)"
 ```
 

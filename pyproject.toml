@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "prism-eval"
-version = "0.3.0"
+version = "0.3.1"
 description = "Open-source unit testing and red-teaming for AI agents — catch digit drops, prompt injections, and OCR drift before production."
 readme = "README.md"
 requires-python = ">=3.10"
